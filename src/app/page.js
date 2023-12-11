@@ -2,7 +2,7 @@
 import Image from 'next/image'
 import { useEffect, useState } from 'react';
 import CommentList from './components/CommentList';
-import styles from './page.module.css'
+import Styles from './styles/Home.module.css'
 
 export default function Home() {
 
@@ -14,7 +14,7 @@ export default function Home() {
     async function fetchdata() {
       const response = await fetch('/data.json');
       const data = await response.json();
-      
+
       setComments(data.comments);
       setCurrentUser(data.currentUser);
     }
@@ -37,9 +37,18 @@ export default function Home() {
   };
 
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <CommentList comments={comments} onDelete={handleDeleteComment} />
+    <main className={Styles.main}>
+      <div className={Styles.container}>
+        <div className={Styles.description}>
+          <CommentList comments={comments} onDelete={handleDeleteComment} />
+        </div>
+        <div className={Styles.contenedorTemplate}>
+          <img
+            className={Styles.imagentemplate}
+            src="/design/desktop-design.jpg"
+            alt="Descripción de la imagen"
+          ></img>
+        </div>
       </div>
     </main>
   )
