@@ -14,6 +14,7 @@ export default function Home() {
     async function fetchdata() {
       const response = await fetch('/data.json');
       const data = await response.json();
+      
       setComments(data.comments);
       setCurrentUser(data.currentUser);
     }
@@ -35,8 +36,6 @@ export default function Home() {
     setComments(updatedComments);
   };
 
-  console.log(comments)
-  console.log(currentUser)
   return (
     <main className={styles.main}>
       <div className={styles.description}>
