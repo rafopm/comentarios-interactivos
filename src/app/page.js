@@ -3,24 +3,37 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react';
 import CommentList from './components/CommentList';
 import Styles from './styles/Home.module.css'
+import useStore from './Stores/store';
 
 export default function Home() {
-
-  const [comments, setComments] = useState([]);
-  const [currentUser, setCurrentUser] = useState([]);
-
+  const { fetchData, currentUser, comments } = useStore();
   useEffect(() => {
-    // Fetch the data from the JSON file
-    async function fetchdata() {
-      const response = await fetch('/data.json');
-      const data = await response.json();
+    const fetchDataAsync = async () => {
+      try {
+        const data = await fetchData();
+        console.log('Datos obtenidos:', data);
+      } catch (error) {
+        console.error('Error al obtener datos en el componente:', error);
+      }
+    };
 
-      setComments(data.comments);
-      setCurrentUser(data.currentUser);
-    }
+    fetchDataAsync();
+  }, [fetchData]);
+  // const [comments, setComments] = useState([]);
+  // const [currentUser, setCurrentUser] = useState([]);
 
-    fetchdata();
-  }, []);
+  // useEffect(() => {
+  //   // Fetch the data from the JSON file
+  //   async function fetchdata() {
+  //     const response = await fetch('/data.json');
+  //     const data = await response.json();
+
+  //     setComments(data.comments);
+  //     setCurrentUser(data.currentUser);
+  //   }
+
+  //   fetchdata();
+  // }, []);
 
   useEffect(() => {
     // Save the comments to local storage
