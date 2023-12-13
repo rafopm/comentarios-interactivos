@@ -49,18 +49,36 @@ export default function Home() {
     setComments(updatedComments);
   };
 
+  console.log(currentUser.image)
   return (
     <main className={Styles.main}>
       <div className={Styles.container}>
         <div className={Styles.description}>
           <CommentList comments={comments} onDelete={handleDeleteComment} />
+          <div className={Styles.commentAddContainer}>
+            <div>
+              <Image
+                width={34}
+                height={34}
+                src={currentUser.image?.png}
+                alt={currentUser.username}
+              />
+
+            </div>
+            <div className={Styles.commentAddNew}>
+              Add comment</div>
+            
+              <button  className={Styles.commentAddButton}>SEND</button>
+           
+          </div>
         </div>
+
         <div className={Styles.contenedorTemplate}>
-          <img
+          {/* <img
             className={Styles.imagentemplate}
             src="/design/desktop-design.jpg"
             alt="Descripción de la imagen"
-          ></img>
+          ></img> */}
         </div>
       </div>
     </main>

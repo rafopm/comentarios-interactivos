@@ -29,19 +29,19 @@
 }
 
 .scoreEdit {
-    position: relative;
-    width: 40px;
-    height: 96px;
-    text-align: center;
-    font-size: 16px;
-    font-weight: 700;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: space-around;
-    border: solid 1px;
-    border-radius: 10px;
-    margin-left: -6px;
-    margin-top: -5px;
+  position: relative;
+  width: 40px;
+  height: 96px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  border: solid 1px;
+  border-radius: 10px;
+  margin-left: -6px;
+  margin-top: -5px;
 }
 
 .scoreEditor button {
@@ -49,11 +49,11 @@
 }
 
 .commentDetail {
-    display: flex;
-    margin-left: 12px;
-    margin-top: -3px;
-    flex-wrap: nowrap;
-    flex-direction: column;
+  display: flex;
+  margin-left: 12px;
+  margin-top: -3px;
+  flex-wrap: nowrap;
+  flex-direction: column;
 }
 
 .commentHeader {
@@ -82,21 +82,21 @@
 }
 
 .iconPlus {
-    position: relative;
-    top: 6px;
+  position: relative;
+  top: 6px;
 }
 
 .iconMinus {
-    position: relative;
-    top: 32px;
+  position: relative;
+  top: 32px;
 }
 
-.scoreNumber{
-    position: relative;
-    top: 22px;
-    display: flex;
-    justify-content: center;
-    width: 40px;
+.scoreNumber {
+  position: relative;
+  top: 22px;
+  display: flex;
+  justify-content: center;
+  width: 40px;
 }
 
 .commentEditReply {
@@ -105,9 +105,9 @@
   font-weight: 700;
 }
 
-.commentEdit{
-    display: flex;
-    gap: 6px;
+.commentEdit {
+  display: flex;
+  gap: 6px;
 }
 
 .commentReply {
@@ -116,35 +116,71 @@
 }
 
 .commentContent {
-    display: flex;
-    margin-top: 16px;
-    margin-left: 13px;
-    font-size: 16px;
-    line-height: 1.5;
-    letter-spacing: 0.3px;
-    margin-right: 10px;
+  display: flex;
+  margin-top: 16px;
+  margin-left: 13px;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.3px;
+  margin-right: 10px;
 }
 
-.containerReplys{
-    display: flex;
+.containerReplys {
+  display: flex;
 }
 
-.commentYou{
-    margin-left: 10px;
-    background-color: #5357b7;
-    color: white;
+.commentYou {
+  margin-left: 10px;
+  background-color: #5357b7;
+  color: white;
+  padding: 0 5px 0 5px;
 }
 
-.commentDelete{
-    display: flex;
+.commentDelete {
+  display: flex;
+  color: red;
+  gap: 10px;
+  margin-right: 28px;
 }
 
-.lineReply{
-    position: relative;
-    height: 170px;
-    width: 2px;
-    background-color: black;
-    margin-left: 44px;
-    margin-right: 43px;
-    margin-top: 18px;
+.lineReply {
+  position: relative;
+  height: 170px;
+  width: 2px;
+  background-color: black;
+  margin-left: 44px;
+  margin-right: 43px;
+  margin-top: 18px;
+}
+
+
+.commentAddContainer {
+  display: flex;
+  padding: 30px 20px 20px 30px;
+  display: flex;
+  border: solid 1px;
+  border-radius: 10px;
+  margin-top: 18px;
+  height: 150px;
+}
+
+.commentAddNew {
+  padding: 12px 10px 10px 22px;
+  display: flex;
+  border: solid 1px;
+  border-radius: 10px;
+  margin-top: -4px;
+  margin-left: 15px;
+  height: 92px;
+  width: 510px;
+}
+
+.commentAddButton{
+  margin-left: 12px;
+  width: 110px;
+  border-radius: 10px;
+  margin-top:-5px; 
+  height: 50px;
+  font-size: 18px;
+  font-weight: 700;
 }

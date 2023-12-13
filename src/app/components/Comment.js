@@ -62,7 +62,7 @@ const Comment = ({ comment, onDelete }) => {
               {comment.createdAt}
             </div>
             {currentUser.username === comment.user.username && (
-              <div onClick={() => onDelete(comment.id)}>
+              <div onClick={() => onDelete(comment.id)} className={Styles.commentDelete}>
                 <Image
                   width={13}
                   height={12}
