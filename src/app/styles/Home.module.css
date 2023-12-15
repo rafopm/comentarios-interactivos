@@ -165,15 +165,20 @@
 }
 
 .commentAddNew {
-  padding: 12px 10px 10px 22px;
   display: flex;
-  border: solid 1px;
+  border: none 1px;
   border-radius: 10px;
   margin-top: -4px;
   margin-left: 15px;
   height: 92px;
   width: 510px;
+  background-color: #5356b729;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 12px 25px 12px 25px;
 }
+
+
 
 .commentAddButton{
   margin-left: 12px;
@@ -183,4 +188,5 @@
   height: 50px;
   font-size: 18px;
   font-weight: 700;
+  
 }

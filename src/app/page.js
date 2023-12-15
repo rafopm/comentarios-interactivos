@@ -6,7 +6,7 @@ import Styles from './styles/Home.module.css'
 import useStore from './Stores/store';
 
 export default function Home() {
-  const { fetchData, currentUser, comments } = useStore();
+  const { fetchData, currentUser, comments, saveCommentsToLocalStorage  } = useStore();
   useEffect(() => {
     const fetchDataAsync = async () => {
       try {
@@ -36,17 +36,17 @@ export default function Home() {
   // }, []);
 
   useEffect(() => {
-    // Save the comments to local storage
-    localStorage.setItem('comments', JSON.stringify({ comments }));
+    // Guardar los comentarios en el Local Storage
+    saveCommentsToLocalStorage(comments);
   }, [comments]);
 
   const handleAddComment = (comment) => {
-    setComments([...comments, comment]);
+    //setComments([...comments, comment]);
   };
 
   const handleDeleteComment = (commentId) => {
     const updatedComments = comments.filter(comment => comment.id !== commentId);
-    setComments(updatedComments);
+    //setComments(updatedComments);
   };
 
   console.log(currentUser.image)
@@ -65,20 +65,18 @@ export default function Home() {
               />
 
             </div>
-            <div className={Styles.commentAddNew}>
-              Add comment</div>
-            
-              <button  className={Styles.commentAddButton}>SEND</button>
-           
+            <textarea  type="text" className={Styles.commentAddNew} placeholder="Add a comment..."   />
+            <button className={Styles.commentAddButton}>SEND</button>
+
           </div>
         </div>
 
         <div className={Styles.contenedorTemplate}>
-          {/* <img
+          <img
             className={Styles.imagentemplate}
             src="/design/desktop-design.jpg"
             alt="Descripción de la imagen"
-          ></img> */}
+          ></img>
         </div>
       </div>
     </main>

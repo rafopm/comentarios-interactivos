@@ -20,7 +20,7 @@ const Comment = ({ comment, onDelete }) => {
     <div>
       <div className={Styles.commentContainer}>
         <div className={Styles.scoreEdit}>
-          <div className={Styles.iconPlus}>
+          <div className={Styles.iconPlus} >
             <Image
               width={11}
               height={11}
