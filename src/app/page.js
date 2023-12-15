@@ -6,7 +6,7 @@ import Styles from './styles/Home.module.css'
 import useStore from './Stores/store';
 
 export default function Home() {
-  const { fetchData, currentUser, comments, saveCommentsToLocalStorage  } = useStore();
+  const { fetchData, currentUser, comments, saveCommentsToLocalStorage } = useStore();
   useEffect(() => {
     const fetchDataAsync = async () => {
       try {
@@ -45,8 +45,11 @@ export default function Home() {
   };
 
   const handleDeleteComment = (commentId) => {
-    const updatedComments = comments.filter(comment => comment.id !== commentId);
-    //setComments(updatedComments);
+    store.deleteComment(commentId);
+  };
+
+  const handleUpdateComment = (commentId, newContent, newScore, newReplies) => {
+    store.updateComment(commentId, newContent, newScore, newReplies);
   };
 
   console.log(currentUser.image)
@@ -54,7 +57,7 @@ export default function Home() {
     <main className={Styles.main}>
       <div className={Styles.container}>
         <div className={Styles.description}>
-          <CommentList comments={comments} onDelete={handleDeleteComment} />
+          <CommentList comments={comments} onDelete={handleDeleteComment} onUpdate={handleUpdateComment}  />
           <div className={Styles.commentAddContainer}>
             <div>
               <Image
@@ -65,8 +68,8 @@ export default function Home() {
               />
 
             </div>
-            <textarea  type="text" className={Styles.commentAddNew} placeholder="Add a comment..."   />
-            <button className={Styles.commentAddButton}>SEND</button>
+            <textarea type="text" className={Styles.commentAddNew} placeholder="Add a comment..." />
+            <button className={Styles.commentAddButton} onClick={handleAddComment}>SEND</button>
 
           </div>
         </div>
