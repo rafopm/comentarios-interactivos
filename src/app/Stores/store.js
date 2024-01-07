@@ -1,7 +1,10 @@
 import { create } from 'zustand';
-import data from '../../../public/data.json';
 
+// Función auxiliar para encontrar el ID máximo en un array de comentarios
 const findMaxId = (arr) => {
+  if (!arr || arr.length === 0) {
+    return 0;
+  }
   let maxId = 0;
   arr.forEach((item) => {
     if (item.id > maxId) {
@@ -11,66 +14,110 @@ const findMaxId = (arr) => {
   return maxId;
 };
 
-const useStore = create((set) => ({
-  currentUser: '',
-  comments: [],
-  lastCommentId: 0,
+// Crear el estado global usando Zustand
+const useStore = create((set) => {
+  // Inicializar el estado con valores predeterminados
+  set(() => ({
+    currentUser: {},
+    comments: [],
+    lastCommentId: 0,
+  }));
 
-  // Nuevo método para realizar una solicitud HTTP y actualizar el estado
-  fetchData: async () => {
-    try {
-      //const response = await fetch('/data.json');
-      //const data = await response.json();
+  // Definir funciones que modifican el estado
+  return {
+    // Función para cargar datos (comentarios) desde la red
+    fetchData: async () => {
+      try {
+        const response = await fetch('/data.json');
+        const data = await response.json();
 
-      // Actualizar el estado con los datos obtenidos
-      const maxCommentId = findMaxId(data.comments);
-      const maxReplyId = findMaxId(data.comments.flatMap((comment) => comment.replies));
-      const maxId = Math.max(maxCommentId, maxReplyId);
-      set({
-        comments: data.comments,
-        currentUser: data.currentUser,
-        lastCommentId: maxId,
+        // Actualizar el estado con los datos obtenidos
+        set(() => ({
+          comments: data.comments,
+          currentUser: data.currentUser,
+          lastCommentId: findMaxId(data.comments),
+        }));
+
+        return useStore.getState();
+      } catch (error) {
+        console.error('Error al obtener datos:', error);
+        throw error;
+      }
+    },
+
+    // Función para agregar un nuevo comentario
+    addComment: (comment) => {
+      set((state) => {
+        const newComments = [...state.comments, comment];
+
+        //  Guardar los comentarios actualizados
+        state.saveComments();
+
+        // Devolver el nuevo estado con los comentarios actualizados
+        return { comments: newComments };
       });
+    },
 
-      console.log(maxId)
-      return data; // Retornar los datos obtenidos
-    } catch (error) {
-      console.error('Error al obtener datos:', error);
-      throw error; // Lanzar el error para que el consumidor pueda manejarlo
-    }
-  },
+    // Función para eliminar un comentario por su ID
+    deleteComment: (commentId) => {
+      set((state) => {
+        const newComments = state.comments.filter((comment) => comment.id !== commentId);
 
-  // Guardar los comentarios en el Local Storage
-  saveCommentsToLocalStorage: (comments) => {
-    localStorage.setItem('comments', JSON.stringify(comments));
-  },
+        // Guardar los comentarios actualizados
+        state.saveComments();
 
+        // Devolver el nuevo estado con los comentarios actualizados
+        return { comments: newComments };
+      });
+    },
 
-  addComment: (comment) => {
-    set((state) => ({
-      comments: [...state.comments, comment],
-    }));
-  },
-  deleteComment: (commentId) => {
-    set((state) => ({
-      comments: state.comments.filter((comment) => comment.id !== commentId),
-    }));
-  },
-  updateComment: (commentId, newContent, newScore, newReplies) => {
-    set((state) => ({
-      comments: state.comments.map((comment) => {
-        if (comment.id === commentId) {
-          return {
-            ...comment,
-            content: newContent,
-            score: newScore,
-            replies: newReplies,
-          };
-        }
-        return comment;
-      }),
-    }));
-  },
-}));
+    // Función para actualizar un comentario por su ID con nuevo contenido, puntaje y respuestas
+    updateComment: (commentId, newContent, newScore, newReplies) => {
+      set((state) => {
+        const newComments = state.comments.map((comment) => {
+          if (comment.id === commentId) {
+            return {
+              ...comment,
+              content: newContent,
+              score: newScore,
+              replies: newReplies,
+            };
+          }
+          return comment;
+        });
 
+        // Actualizar el estado con los comentarios obtenidos
+        state.saveComments();
+
+        // Devolver el nuevo estado con los comentarios actualizados
+        return { comments: newComments };
+      });
+    },
+
+    // Función para guardar comentarios en la red (simula una solicitud de red)
+    saveComments: async () => {
+      try {
+        // Simular una solicitud de red para guardar los comentarios
+        // Puedes enviar los comentarios al servidor en una aplicación real
+        console.log('Guardando comentarios en la red...');
+
+        // En una aplicación real, puedes usar fetch u otra lógica para enviar los datos al servidor
+        // await fetch('/save-comments', {
+        //   method: 'POST',
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //   },
+        //   body: JSON.stringify(useStore.getState().comments),
+        // });
+
+        console.log('Comentarios guardados en la red');
+      } catch (error) {
+        console.error('Error al guardar comentarios en la red:', error);
+        throw error;
+      }
+    },
+  };
+});
+
+// Exportar el estado para su uso en otros módulos
 export default useStore;

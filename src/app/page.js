@@ -6,12 +6,27 @@ import Styles from './styles/Home.module.css'
 import useStore from './Stores/store';
 
 export default function Home() {
-  const { fetchData, currentUser, comments, saveCommentsToLocalStorage } = useStore();
+  const {
+    fetchData,
+    currentUser,
+    comments,
+    saveCommentsToLocalStorage,
+    addComment,
+    updateComment,
+    deleteComment,
+  } = useStore();
+
   useEffect(() => {
     const fetchDataAsync = async () => {
       try {
         const data = await fetchData();
-        console.log('Datos obtenidos:', data);
+
+        if (data.currentUser) {
+          console.log('CurrentUser', data.currentUser.image);
+        } else {
+          console.log('CurrentUser no está presente');
+        }
+        
       } catch (error) {
         console.error('Error al obtener datos en el componente:', error);
       }
@@ -19,45 +34,32 @@ export default function Home() {
 
     fetchDataAsync();
   }, [fetchData]);
-  // const [comments, setComments] = useState([]);
-  // const [currentUser, setCurrentUser] = useState([]);
 
-  // useEffect(() => {
-  //   // Fetch the data from the JSON file
-  //   async function fetchdata() {
-  //     const response = await fetch('/data.json');
-  //     const data = await response.json();
 
-  //     setComments(data.comments);
-  //     setCurrentUser(data.currentUser);
-  //   }
 
-  //   fetchdata();
-  // }, []);
-
-  useEffect(() => {
-    // Guardar los comentarios en el Local Storage
-    saveCommentsToLocalStorage(comments);
-  }, [comments]);
-
-  const handleAddComment = (comment) => {
+  const handleAddComment = () => {
     //setComments([...comments, comment]);
   };
 
   const handleDeleteComment = (commentId) => {
-    store.deleteComment(commentId);
+    deleteComment(commentId);
   };
 
   const handleUpdateComment = (commentId, newContent, newScore, newReplies) => {
-    store.updateComment(commentId, newContent, newScore, newReplies);
+    updateComment(commentId, newContent, newScore, newReplies);
   };
 
-  console.log(currentUser.image)
+  // Renderizar solo si currentUser existe
+  if (!currentUser) {
+    return null; // o puedes mostrar un mensaje de carga o lo que prefieras
+  }
+
+ 
   return (
     <main className={Styles.main}>
       <div className={Styles.container}>
         <div className={Styles.description}>
-          <CommentList comments={comments} onDelete={handleDeleteComment} onUpdate={handleUpdateComment}  />
+          <CommentList comments={comments} onDelete={handleDeleteComment} onUpdate={handleUpdateComment} />
           <div className={Styles.commentAddContainer}>
             <div>
               <Image

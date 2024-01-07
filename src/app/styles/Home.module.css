@@ -1,7 +1,7 @@
 .container {
   width: 732px;
   margin: auto;
-  margin-top: 45px;
+  margin-top: 63px;
   display: flex;
   /* gap: 10px; */
   flex-direction: column;
@@ -19,12 +19,15 @@
   z-index: -1;
 }
 
+.blockContainer {
+  margin-top: 18px;
+}
+
 .commentContainer {
   padding: 30px 20px 20px 30px;
   display: flex;
   border: solid 1px;
   border-radius: 10px;
-  margin-top: 18px;
   height: 170px;
 }
 
@@ -125,6 +128,15 @@
   margin-right: 10px;
 }
 
+.replyContainer {
+  padding: 30px 20px 20px 30px;
+  display: flex;
+  border: solid 1px;
+  border-radius: 10px;
+  height: 170px;
+  margin-top: 18px;
+}
+
 .containerReplys {
   display: flex;
 }
@@ -145,7 +157,6 @@
 
 .lineReply {
   position: relative;
-  height: 170px;
   width: 2px;
   background-color: black;
   margin-left: 44px;
@@ -177,7 +188,6 @@
   font-weight: 700;
   padding: 12px 25px 12px 25px;
 }
-
 
 
 .commentAddButton{

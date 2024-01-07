@@ -6,15 +6,10 @@ import Styles from '../styles/Home.module.css'
 const Replies = ({ reply, OnDeleteReply }) => {
   const { currentUser } = useStore();
 
-  console.log('replies', reply);
   return (
-    <div className={Styles.containerReplys}>
-      <div className={Styles.lineReply}>
 
-      </div>
-      <div></div>
       <div>
-        <div className={Styles.commentContainer}>
+        <div className={Styles.replyContainer}>
           <div className={Styles.scoreEdit}>
             <div className={Styles.iconPlus}>
               <Image
@@ -99,9 +94,9 @@ const Replies = ({ reply, OnDeleteReply }) => {
             </div>
           </div>
         </div>
-        <div> <span> </span></div>
+        
       </div>
-    </div>
+ 
   )
 }
 

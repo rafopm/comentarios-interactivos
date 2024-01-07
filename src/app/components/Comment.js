@@ -1,26 +1,29 @@
 'use client'
 import { useState } from "react";
-import Replies from "./replies";
+import Replies from "./Replies";
 import Styles from '../styles/Home.module.css'
 import Image from "next/image";
 import useStore from "../Stores/store";
 
-const Comment = ({ comment, onDelete }) => {
+const Comment = ({ comment, onDelete, onUpdate }) => {
   const [replys, setReplys] = useState([]);
   const { currentUser } = useStore();
 
   const handleDeleteReply = (replyId) => {
     const updatedReply = comment.replies.filter(reply => reply.id !== replyId);
-    setComments(updatedReply);
+    setReplys(updatedReply);
   };
 
-  console.log('userActual', currentUser.username);
-  console.log('usercomment', comment.user.username);
+  const handleScore = (increment) => {
+    const newScore = comment.score + increment;
+    onUpdate(comment.id, comment.content, newScore, comment.replies);
+  };
+
   return (
-    <div>
+    <div >
       <div className={Styles.commentContainer}>
         <div className={Styles.scoreEdit}>
-          <div className={Styles.iconPlus} >
+          <div className={Styles.iconPlus} onClick={() => handleScore(1)}>
             <Image
               width={11}
               height={11}
@@ -102,9 +105,9 @@ const Comment = ({ comment, onDelete }) => {
           </div>
         </div>
       </div>
-      <div>
-        <div>
-          
+      <div className={Styles.containerReplys}>
+        <div className={Styles.lineReply}>
+
         </div>
         <div>
           {comment.replies?.map(reply => (
