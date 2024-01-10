@@ -16,6 +16,8 @@ export default function Home() {
     deleteComment,
   } = useStore();
 
+  const [newComment, setNewComment] = useState('');
+
   useEffect(() => {
     const fetchDataAsync = async () => {
       try {
@@ -35,10 +37,12 @@ export default function Home() {
     fetchDataAsync();
   }, [fetchData]);
 
-
+  const handleChange = (event) => {
+    setNewComment(event.target.value);
+  };
 
   const handleAddComment = () => {
-    //setComments([...comments, comment]);
+    addComment(newComment);
   };
 
   const handleDeleteComment = (commentId) => {
@@ -70,18 +74,18 @@ export default function Home() {
               />
 
             </div>
-            <textarea type="text" className={Styles.commentAddNew} placeholder="Add a comment..." />
+            <textarea type="text" className={Styles.commentAddNew} placeholder="Add a comment..." value={newComment} onChange={handleChange}/>
             <button className={Styles.commentAddButton} onClick={handleAddComment}>SEND</button>
 
           </div>
         </div>
 
         <div className={Styles.contenedorTemplate}>
-          <img
+          {/* <img
             className={Styles.imagentemplate}
             src="/design/desktop-design.jpg"
             alt="Descripción de la imagen"
-          ></img>
+          ></img> */}
         </div>
       </div>
     </main>

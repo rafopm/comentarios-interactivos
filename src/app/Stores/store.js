@@ -10,6 +10,12 @@ const findMaxId = (arr) => {
     if (item.id > maxId) {
       maxId = item.id;
     }
+    if (item.replies && item.replies.length > 0) {
+      const repliesMaxId = findMaxId(item.replies);
+      if (repliesMaxId > maxId) {
+        maxId = repliesMaxId;
+      }
+    }
   });
   return maxId;
 };
@@ -47,14 +53,28 @@ const useStore = create((set) => {
 
     // Función para agregar un nuevo comentario
     addComment: (comment) => {
+      const id = useStore.getState().lastCommentId + 1;
+      const user = useStore.getState().currentUser;
+
+      const newComment = {
+        id,
+        content: comment,
+        createdAt: 'just now',
+        score: 0,
+        user,
+        replies: [],
+      };
+
+      console.log("addComment",newComment)
+      
       set((state) => {
-        const newComments = [...state.comments, comment];
+        const newComments = [...state.comments, newComment];
 
         //  Guardar los comentarios actualizados
         state.saveComments();
 
         // Devolver el nuevo estado con los comentarios actualizados
-        return { comments: newComments };
+        return { comments: newComments, lastCommentId: id };
       });
     },
 
@@ -64,7 +84,8 @@ const useStore = create((set) => {
         const newComments = state.comments.filter((comment) => comment.id !== commentId);
 
         // Guardar los comentarios actualizados
-        state.saveComments();
+        //state.saveComments();
+        //state.lastCommentId = findMaxId(newComments);
 
         // Devolver el nuevo estado con los comentarios actualizados
         return { comments: newComments };

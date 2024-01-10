@@ -9,6 +9,7 @@ const Comment = ({ comment, onDelete, onUpdate }) => {
   const [replys, setReplys] = useState([]);
   const { currentUser } = useStore();
 
+  console.log("Comment",comment)
   const handleDeleteReply = (replyId) => {
     const updatedReply = comment.replies.filter(reply => reply.id !== replyId);
     setReplys(updatedReply);
