@@ -1,11 +1,12 @@
 .container {
   width: 732px;
   margin: auto;
-  margin-top: 63px;
+  margin-top: 45px;
   display: flex;
   /* gap: 10px; */
   flex-direction: column;
   flex-wrap: nowrap;
+  
 }
 
 .contenedorTemplate {
@@ -26,9 +27,11 @@
 .commentContainer {
   padding: 30px 20px 20px 30px;
   display: flex;
-  border: solid 1px;
+  
   border-radius: 10px;
   height: 170px;
+  margin-top: 18px;
+  background-color: var(--white);
 }
 
 .scoreEdit {
@@ -41,7 +44,7 @@
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: space-around;
-  border: solid 1px;
+  background-color: var(--very-light-gray);
   border-radius: 10px;
   margin-left: -6px;
   margin-top: -5px;
@@ -57,6 +60,7 @@
   margin-top: -3px;
   flex-wrap: nowrap;
   flex-direction: column;
+  width: 100%;
 }
 
 .commentHeader {
@@ -100,6 +104,7 @@
   display: flex;
   justify-content: center;
   width: 40px;
+  color: var(--moderate-blue);
 }
 
 .commentEditReply {
@@ -131,10 +136,11 @@
 .replyContainer {
   padding: 30px 20px 20px 30px;
   display: flex;
-  border: solid 1px;
+  
   border-radius: 10px;
   height: 170px;
   margin-top: 18px;
+  background-color: var(--white);
 }
 
 .containerReplys {
@@ -143,36 +149,45 @@
 
 .commentYou {
   margin-left: 10px;
-  background-color: #5357b7;
+  background-color: var(--moderate-blue);
   color: white;
   padding: 0 5px 0 5px;
 }
 
 .commentDelete {
   display: flex;
-  color: red;
+  color: var(--soft-red);
   gap: 10px;
   margin-right: 28px;
 }
 
+.lineContainer {
+  display: flex;
+  
+}
+
+.separator{
+  
+}
+
 .lineReply {
   position: relative;
-  width: 2px;
-  background-color: black;
+  width: 0.1px;
+  background-color: var(--light-grayish-blue);
   margin-left: 44px;
   margin-right: 43px;
-  margin-top: 18px;
+
 }
 
 
 .commentAddContainer {
-  display: flex;
-  padding: 30px 20px 20px 30px;
-  display: flex;
-  border: solid 1px;
-  border-radius: 10px;
-  margin-top: 18px;
-  height: 150px;
+padding: 30px 20px 20px 30px;
+    display: flex;
+    
+    border-radius: 10px;
+    height: 170px;
+    margin-top: 18px;
+    background-color: var(--white);
 }
 
 .commentAddNew {
@@ -183,10 +198,11 @@
   margin-left: 15px;
   height: 92px;
   width: 510px;
-  background-color: #5356b729;
+ border: 1px solid var(--light-grayish-blue);
   font-size: 16px;
-  font-weight: 700;
+  letter-spacing: 0.015em;
   padding: 12px 25px 12px 25px;
+  font-family: 'Rubik', sans-serif;
 }
 
 
@@ -198,5 +214,7 @@
   height: 50px;
   font-size: 18px;
   font-weight: 700;
-  
+  background-color: var(--moderate-blue);
+  color: var(--white);
+  border: 0;
 }

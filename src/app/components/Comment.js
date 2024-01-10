@@ -9,7 +9,7 @@ const Comment = ({ comment, onDelete, onUpdate }) => {
   const [replys, setReplys] = useState([]);
   const { currentUser } = useStore();
 
-  console.log("Comment",comment)
+  console.log("Comment", comment)
   const handleDeleteReply = (replyId) => {
     const updatedReply = comment.replies.filter(reply => reply.id !== replyId);
     setReplys(updatedReply);
@@ -107,8 +107,12 @@ const Comment = ({ comment, onDelete, onUpdate }) => {
         </div>
       </div>
       <div className={Styles.containerReplys}>
-        <div className={Styles.lineReply}>
+        <div className={Styles.lineContainer}>
+          <div className={Styles.separator}>
 
+          </div>
+          <div className={Styles.lineReply}>
+          </div>
         </div>
         <div>
           {comment.replies?.map(reply => (
